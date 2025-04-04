@@ -1,29 +1,22 @@
-// LocationMarker.js
-import React, { useState, useEffect } from "react";
-import { useMap, Marker, Popup } from "react-leaflet";
+import { useEffect } from "react";
+import { Circle, useMap } from "react-leaflet";
 
-const LocationMarker = ({ onLocationFound }) => {
-  const [position, setPosition] = useState(null);
-  const map = useMap();
+const LocationMarker = ({ position }) => {
+  const map = useMap();  
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        setPosition([latitude, longitude]);
-        map.flyTo([latitude, longitude], 10);
-        onLocationFound([latitude, longitude]);
-      },
-      () => {
-        alert("Could not get location.");
-      }
-    );
-  }, [map, onLocationFound]);
+    if (position) {
+      console.log("📍 อัปเดตตำแหน่ง Marker:", position);
+      map.setView(position, 10); // ขยับแผนที่ไปยังตำแหน่งใหม่
+    }
+  }, [position, map]);
 
   return position ? (
-    <Marker position={position}>
-      <Popup>You are here!</Popup>
-    </Marker>
+    <Circle
+      center={position}
+      pathOptions={{ color: "red", fillColor: "red", fillOpacity: 0.5 }}
+      radius={5000} // ขนาดวงกลม 5 km
+    />
   ) : null;
 };
 

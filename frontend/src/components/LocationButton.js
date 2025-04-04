@@ -17,11 +17,16 @@ const LocationButton = ({ setUserLocation }) => {
 
   return (
     <button 
-    onClick={getLocation}
-    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition ease-in-out duration-300 transform hover:scale-105"
-  >
-    📍 ค้นหาตำแหน่งของฉัน
-  </button>
+      onClick={getLocation}
+      className="bg-gradient-to-r from-blue-500 to-blue-600 
+      hover:from-blue-600 hover:to-blue-700 
+      text-white text-lg font-semibold 
+      py-2 px-4 rounded-2xl 
+      shadow-lg transition-all duration-300 
+      transform hover:scale-105 active:scale-95"
+    >
+      📍 ค้นหาตำแหน่งของฉัน
+    </button>
   );
 };
 
